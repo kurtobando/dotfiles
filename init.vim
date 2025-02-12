@@ -1,6 +1,6 @@
 call plug#begin()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Example Vim Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use tab for trigger completion with characters ahead and navigate
@@ -103,10 +103,10 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-"nnoremap <leader>e :Explore<CR>
 nnoremap <leader>e :NvimTreeToggle<CR>
 nnoremap <leader>qq :q<CR>
-
+nnoremap [b :bprevious<CR>
+nnoremap ]b :bnext<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -119,11 +119,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 call plug#end()
 
 " Set theme
-colorscheme tokyonight
+colorscheme tokyonight-night
 
 " Lua Configuration
 lua <<EOF
@@ -132,8 +133,27 @@ require'nvim-tree'.setup {
   hijack_netrw = true,
   update_cwd = true,
   view = {
-    width = 30,
-    side = 'left',
+    width = 60,
+    side = 'right',
   },
 }
+require("bufferline").setup {
+
+}
+require('telescope').setup{
+  defaults = {
+    find_command = {'rg', '--files', '--hidden', '--glob', '!.git/'},
+    file_ignore_patterns = {
+	".git/",
+	"node_modules",
+	"vendor"
+    }
+  },
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
+}
 EOF
+
