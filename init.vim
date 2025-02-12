@@ -69,6 +69,8 @@ augroup mygroup
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Set Coc root patterns for PHP and Blade files in Laravel projects
+  autocmd FileType php,blade let b:coc_root_patterns = ['.git', '.env', 'composer.json', 'artisan']
 augroup end
 
 " Applying code actions to the selected code block
@@ -91,6 +93,8 @@ nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 " Run the Code Lens action on the current line
 nmap <leader>cl  <Plug>(coc-codelens-action)
 
+" Now coc-copilot doesn't support auto-updating completion panel. You need to update completions manually
+inoremap <silent><expr><c-l> coc#refresh()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,7 +108,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>e :NvimTreeToggle<CR>
-nnoremap <leader>qq :q<CR>
+nnoremap <leader>qq :q!<CR>
 nnoremap [b :bprevious<CR>
 nnoremap ]b :bnext<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -128,6 +132,12 @@ colorscheme tokyonight-night
 
 " Lua Configuration
 lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {} -- Disable problematic languages temporarily
+  },
+}
 require'nvim-tree'.setup {
   disable_netrw = true,
   hijack_netrw = true,
@@ -146,7 +156,8 @@ require('telescope').setup{
     file_ignore_patterns = {
 	".git/",
 	"node_modules",
-	"vendor"
+	"vendor",
+	"storage/framework/"
     }
   },
   pickers = {
