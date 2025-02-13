@@ -46,21 +46,32 @@ set ignorecase
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-sensible'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-Plug 'github/copilot.vim'
-Plug 'folke/tokyonight.nvim'
+" Core and Dependencies
+Plug 'tpope/vim-sensible'                                   " Sensible defaults
+Plug 'nvim-lua/plenary.nvim'                                " Required by many plugins
+
+" Completion and Intelligence
+Plug 'neoclide/coc.nvim', {'branch': 'release'}             " Code completion
+Plug 'github/copilot.vim'                                   " AI code suggestions
+
+" File Navigation and Explorer
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }    " Fuzzy finder
+Plug 'nvim-tree/nvim-tree.lua'                              " File explorer
+Plug 'nvim-tree/nvim-web-devicons'                          " Icons for nvim-tree
+
+" Syntax and Language
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
+
+" UI Enhancements
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }              " Buffer line
+Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of minimal plugins
+
+" Theme
+Plug 'folke/tokyonight.nvim'                                " Color scheme
 
 call plug#end()
 
-colorscheme tokyonight
+colorscheme tokyonight-night
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lua Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
