@@ -1,4 +1,33 @@
 call plug#begin()
+
+" Set global extensions for CoC
+let g:coc_global_extensions = [
+  \ '@yaegassy/coc-intelephense',
+  \ '@yaegassy/coc-laravel',
+  \ '@yaegassy/coc-phpstan',
+  \ '@yaegassy/coc-volar',
+  \ '@yaegassy/coc-volar-tools',
+  \ 'coc-actions',
+  \ 'coc-blade',
+  \ 'coc-css',
+  \ 'coc-dotenv',
+  \ 'coc-emmet',
+  \ 'coc-git',
+  \ 'coc-go',
+  \ 'coc-html',
+  \ 'coc-html-css-support',
+  \ 'coc-jsref',
+  \ 'coc-json',
+  \ 'coc-marketplace',
+  \ 'coc-php-cs-fixer',
+  \ 'coc-phpfmt',
+  \ 'coc-prettier',
+  \ 'coc-tailwindcss',
+  \ 'coc-tsserver',
+  \ 'coc-tsserver-dev',
+  \ 'coc-vimlsp',
+  \ 'coc-yaml',
+  \ ]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
