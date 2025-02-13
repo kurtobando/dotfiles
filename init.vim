@@ -83,6 +83,9 @@ imap <silent> <C-n> <Plug>(copilot-next)
 imap <silent> <C-p> <Plug>(copilot-previous)
 imap <silent> <C-\> <Plug>(copilot-dismiss)
 let g:copilot_no_tab_map = v:true
+
+" Keymap to format the current file
+nnoremap <leader>fm :call CocAction('format')<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
