@@ -155,8 +155,8 @@ require('telescope').setup{
     find_command = {'rg', '--files', '--hidden', '--glob', '!.git/'},
     file_ignore_patterns = {
 	".git/",
-	"node_modules",
-	"vendor",
+	"node_modules/",
+	"vendor/",
 	"storage/framework/"
     }
   },
