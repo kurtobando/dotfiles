@@ -1,8 +1,26 @@
 call plug#begin()
-
- """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Example Vim Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = " "
+
+set number
+set clipboard=unnamedplus
+set autowrite " Automatically save before commands like :next and :make
+set smartcase " Do smart case matching
+set showmatch " Show matching bracket.
+set ignorecase " Do case insensitive matching
+set smartindent " Do smart autoindenting when starting a new line
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>e :NvimTreeToggle<CR>
+nnoremap <leader>qq :q<CR>
+nnoremap [b :bprevious<CR>
+nnoremap ]b :bnext<CR>
+
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file
@@ -31,11 +49,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -53,64 +66,23 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Coc code actions
+nmap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>aC <Plug>(coc-codeaction-cursor)
+vmap <leader>ac <Plug>(coc-codeaction-selected)
 
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
+" Quick window navigation
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Right> <C-W>l
 
-" Formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s)
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  " Set Coc root patterns for PHP and Blade files in Laravel projects
-  autocmd FileType php,blade let b:coc_root_patterns = ['.git', '.env', 'composer.json', 'artisan']
-augroup end
-
-" Applying code actions to the selected code block
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying code actions at the cursor position
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-" Remap keys for apply code actions affect whole buffer
-nmap <leader>as  <Plug>(coc-codeaction-source)
-" Apply the most preferred quickfix action to fix diagnostic on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Remap keys for applying refactor code actions
-nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
-" Run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" Now coc-copilot doesn't support auto-updating completion panel. You need to update completions manually
-inoremap <silent><expr><c-l> coc#refresh()
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Configuration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = " "
-
-set number
-set clipboard=unnamedplus
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>e :NvimTreeToggle<CR>
-nnoremap <leader>qq :q!<CR>
-nnoremap [b :bprevious<CR>
-nnoremap ]b :bnext<CR>
+" Copilot setup
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+imap <silent> <C-n> <Plug>(copilot-next)
+imap <silent> <C-p> <Plug>(copilot-previous)
+imap <silent> <C-\> <Plug>(copilot-dismiss)
+let g:copilot_no_tab_map = v:true
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,9 +96,12 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'github/copilot.vim'
 
 call plug#end()
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Additonal Setups
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set theme
 colorscheme tokyonight-night
 
