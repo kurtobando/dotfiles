@@ -135,7 +135,7 @@ Plug 'folke/tokyonight.nvim'                                " Color scheme
 
 call plug#end()
 
-colorscheme tokyonight-night
+colorscheme tokyonight-moon
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lua Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
