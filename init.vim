@@ -154,6 +154,25 @@ require'nvim-tree'.setup {
     width = 60,
     side = 'right',
   },
+  filters = {
+    dotfiles = false,
+    custom = {
+      -- Explicitly exclude patterns except .env
+      "^.git$",
+      "^node_modules$",
+      "^vendor$",
+      ".DS_Store",
+      -- Add any other patterns you want to hide
+    },
+    exclude = {}, 
+  },
+  git = {
+    enable = false,  -- Disable git integration to prevent gitignore rules
+  },
+  renderer = {
+    special_files = { ".env" },
+    highlight_git = false,
+  },
 }
 require('mini.pairs').setup({
     pairs = {
@@ -185,17 +204,28 @@ require('mini.move').setup({
 require("bufferline").setup{}
 require('telescope').setup{
   defaults = {
-    find_command = {'rg', '--files', '--hidden', '--glob', '!.git/'},
+    -- Using ripgrep with specific flags to show hidden files but respect gitignore
+    find_command = {
+      'rg',
+      '--files',
+      '--hidden',
+      '--no-ignore',  -- Don't respect gitignore
+      '--glob',
+      '!.git/',       -- Still exclude .git directory
+    },
     file_ignore_patterns = {
-	".git/",
-	"node_modules/",
-	"vendor/",
-	"storage/framework/"
+      "^.git/",
+      "^node_modules/",
+      "^vendor/",
+      "^storage/framework/",
+      -- Add other patterns you want to ignore
+      -- Note: Don't add .env here since we want to show it
     }
   },
   pickers = {
     find_files = {
-      hidden = true
+      hidden = true,    -- Show hidden files
+      no_ignore = true  -- Don't respect gitignore
     }
   }
 }
