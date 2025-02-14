@@ -36,13 +36,77 @@ let g:coc_global_extensions = [
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
 
-set number
-set clipboard=unnamedplus
-set smartcase
-set smartindent
-set autowrite 
-set showmatch 
-set ignorecase
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hidden                              " Allow switching buffers without saving
+set history=1000                        " Increase command history
+set updatetime=300                      " Faster completion and better UX
+set timeoutlen=500                      " Faster key sequence completion
+set mouse=a                             " Enable mouse support in all modes
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UI Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number                              " Show line numbers
+set cursorline                          " Highlight current line
+set signcolumn=yes                      " Always show sign column
+set showmatch                           " Highlight matching brackets
+set termguicolors                       " Enable true colors support
+set scrolloff=8                         " Keep 8 lines above/below cursor
+set sidescrolloff=8                     " Keep 8 characters left/right of cursor
+set cmdheight=2                         " More space for command line
+set laststatus=2                        " Always show status line
+set showtabline=2                       " Always show tab line
+set noshowmode                          " Don't show mode (use status line instead)
+set splitbelow                          " Open horizontal splits below
+set splitright                          " Open vertical splits right
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Search Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ignorecase                          " Case insensitive search
+set smartcase                           " Case sensitive if uppercase present
+set hlsearch                            " Highlight search results
+set incsearch                           " Show matches while typing
+set wrapscan                            " Wrap around when searching
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indentation and Formatting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set expandtab                           " Use spaces instead of tabs
+set smarttab                            " Insert spaces based on shiftwidth
+set tabstop=4                           " Width of tab character
+set softtabstop=4                       " Fine tunes amount of whitespace
+set shiftwidth=4                        " Size of indent
+set smartindent                         " Smart autoindenting on new lines
+set autoindent                          " Copy indent from current line for new lines
+set wrap                                " Enable line wrapping
+set linebreak                           " Wrap lines at convenient points
+set breakindent                         " Preserve indentation in wrapped text
+"set textwidth=120                       " Maximum line length
+"set colorcolumn=+1                      " Show column limit indicator
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" File Handling
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autowrite                           " Auto save before commands like :next
+set autoread                            " Auto reload if file changed outside
+set nobackup                            " Don't create backup files
+set nowritebackup                       " Don't create backup while editing
+set undofile                            " Persistent undo history
+set undolevels=1000                     " Maximum undo levels
+set clipboard=unnamedplus               " Use system clipboard
+set encoding=utf-8                      " Set default encoding
+set fileencoding=utf-8                  " Set default file encoding
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Performance
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set lazyredraw                          " Don't redraw while executing macros
+set ttyfast                             " Faster terminal connection
+set synmaxcol=200                       " Only highlight first 200 columns
+set regexpengine=1                      " Use old regexp engine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
