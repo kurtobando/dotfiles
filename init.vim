@@ -170,7 +170,6 @@ require'nvim-tree'.setup {
     enable = false,  -- Disable git integration to prevent gitignore rules
   },
   renderer = {
-    special_files = { ".env" },
     highlight_git = false,
   },
 }
