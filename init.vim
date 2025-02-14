@@ -55,9 +55,9 @@ set showmatch                           " Highlight matching brackets
 set termguicolors                       " Enable true colors support
 set scrolloff=8                         " Keep 8 lines above/below cursor
 set sidescrolloff=8                     " Keep 8 characters left/right of cursor
-set cmdheight=2                         " More space for command line
-set laststatus=2                        " Always show status line
-set showtabline=2                       " Always show tab line
+"set cmdheight=2                         " More space for command line
+"set laststatus=2                        " Always show status line
+"set showtabline=2                       " Always show tab line
 set noshowmode                          " Don't show mode (use status line instead)
 set splitbelow                          " Open horizontal splits below
 set splitright                          " Open vertical splits right
