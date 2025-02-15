@@ -120,6 +120,8 @@ Plug 'github/copilot.vim'                                   " AI code suggestion
 
 " File Navigation and Explorer
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }    " Fuzzy finder
+Plug 'nvim-telescope/telescope-fzy-native.nvim'             " Better sorting performance
+Plug 'nvim-telescope/telescope-file-browser.nvim'           " Better file browsing
 Plug 'nvim-tree/nvim-tree.lua'                              " File explorer
 Plug 'nvim-tree/nvim-web-devicons'                          " Icons for nvim-tree
 
@@ -203,28 +205,31 @@ require('mini.move').setup({
 require("bufferline").setup{}
 require('telescope').setup{
   defaults = {
-    -- Using ripgrep with specific flags to show hidden files but respect gitignore
-    find_command = {
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
+    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+    vimgrep_arguments = {
       'rg',
-      '--files',
-      '--hidden',
-      '--no-ignore',  -- Don't respect gitignore
-      '--glob',
-      '!.git/',       -- Still exclude .git directory
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
     },
     file_ignore_patterns = {
       "^.git/",
       "^node_modules/",
       "^vendor/",
       "^storage/framework/",
-      -- Add other patterns you want to ignore
-      -- Note: Don't add .env here since we want to show it
-    }
+    },
+    cache_picker = {
+      num_pickers = 3,
+      limit_entries = 300,
+    },
   },
   pickers = {
     find_files = {
-      hidden = true,    -- Show hidden files
-      no_ignore = true  -- Don't respect gitignore
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
     }
   }
 }
