@@ -55,9 +55,7 @@ set showmatch                           " Highlight matching brackets
 set termguicolors                       " Enable true colors support
 set scrolloff=8                         " Keep 8 lines above/below cursor
 set sidescrolloff=8                     " Keep 8 characters left/right of cursor
-"set cmdheight=2                         " More space for command line
-"set laststatus=2                        " Always show status line
-"set showtabline=2                       " Always show tab line
+set showtabline=2                       " Always show tab line
 set noshowmode                          " Don't show mode (use status line instead)
 set splitbelow                          " Open horizontal splits below
 set splitright                          " Open vertical splits right
@@ -84,8 +82,6 @@ set autoindent                          " Copy indent from current line for new 
 set wrap                                " Enable line wrapping
 set linebreak                           " Wrap lines at convenient points
 set breakindent                         " Preserve indentation in wrapped text
-"set textwidth=120                       " Maximum line length
-"set colorcolumn=+1                      " Show column limit indicator
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File Handling
@@ -244,6 +240,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>e :NvimTreeToggle<CR>
 nnoremap <leader>qq :q<CR>
+nnoremap <leader>bd :bd<CR>
 nnoremap [b :bprevious<CR>
 nnoremap ]b :bnext<CR>
 
