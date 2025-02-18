@@ -121,6 +121,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'             " Better sorting per
 Plug 'nvim-telescope/telescope-file-browser.nvim'           " Better file browsing
 Plug 'nvim-tree/nvim-tree.lua'                              " File explorer
 Plug 'nvim-tree/nvim-web-devicons'                          " Icons for nvim-tree
+Plug 'tpope/vim-surround'                                   " Surround text objects
 
 " Syntax and Language
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
