@@ -49,6 +49,7 @@ set mouse=a                             " Enable mouse support in all modes
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number                              " Show line numbers
+set relativenumber                      " Show relative line numbers
 set cursorline                          " Highlight current line
 set signcolumn=yes                      " Always show sign column
 set showmatch                           " Highlight matching brackets
