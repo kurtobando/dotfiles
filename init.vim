@@ -228,6 +228,7 @@ require('telescope').setup{
       "^node_modules/",
       "^vendor/",
       "^storage/framework/",
+      "^storage/logs/",
     },
     cache_picker = {
       num_pickers = 3,
