@@ -133,6 +133,9 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of mini
 " Theme
 Plug 'folke/tokyonight.nvim'                                " Color scheme
 
+" Laravel/Blade Support
+Plug 'jwalton512/vim-blade'                                " Blade syntax highlighting
+
 call plug#end()
 
 colorscheme tokyonight-moon
@@ -144,6 +147,12 @@ require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true,
     disable = {} 
+  },
+  ensure_installed = {
+    "php",
+    "html",
+    "css",
+    "javascript",
   },
 }
 require'nvim-tree'.setup {
