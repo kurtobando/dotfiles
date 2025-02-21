@@ -21,7 +21,6 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-marketplace',
   \ 'coc-php-cs-fixer',
-  \ 'coc-phpfmt',
   \ 'coc-prettier',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
