@@ -1,4 +1,3 @@
-call plug#begin()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set global extensions for CoC
@@ -104,9 +103,12 @@ set lazyredraw                          " Don't redraw while executing macros
 set ttyfast                             " Faster terminal connection
 set synmaxcol=200                       " Only highlight first 200 columns
 set regexpengine=1                      " Use old regexp engine
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+
 " Core and Dependencies
 Plug 'tpope/vim-sensible'                                   " Sensible defaults
 Plug 'nvim-lua/plenary.nvim'                                " Required by many plugins
@@ -132,14 +134,12 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of mini
 
 " Theme
 Plug 'folke/tokyonight.nvim'                                " Color scheme
-Plug 'rose-pine/neovim'
 
 " Laravel/Blade Support
 Plug 'jwalton512/vim-blade'                                " Blade syntax highlighting
 
 call plug#end()
 
-colorscheme rose-pine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lua Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,4 +318,6 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Set colorscheme
+colorscheme tokyonight-moon
 
