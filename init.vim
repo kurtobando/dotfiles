@@ -100,9 +100,11 @@ set fileencoding=utf-8                  " Set default file encoding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set lazyredraw                          " Don't redraw while executing macros
 set ttyfast                             " Faster terminal connection
-set synmaxcol=200                       " Only highlight first 200 columns
-set regexpengine=1                      " Use old regexp engine
-
+set synmaxcol=3000                      " Highlight up to 3000 columns
+set redrawtime=10000                    " Allow more time for syntax highlighting
+set updatetime=300                      " Faster completion
+set maxmempattern=2000000               " Increase memory limit for syntax highlighting
+set re=0                                " Use new regexp engine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -332,6 +334,9 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Clear search highlighting with <Esc>
+nnoremap <Esc> :noh<CR>
 
 " Set colorscheme
 colorscheme tokyonight-moon
