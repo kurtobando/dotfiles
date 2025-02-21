@@ -132,10 +132,11 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of mini
 
 " Theme
 Plug 'folke/tokyonight.nvim'                                " Color scheme
+Plug 'rose-pine/neovim'
 
 call plug#end()
 
-colorscheme tokyonight-moon
+colorscheme rose-pine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lua Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
