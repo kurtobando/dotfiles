@@ -134,6 +134,9 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of mini
 Plug 'folke/tokyonight.nvim'                                " Color scheme
 Plug 'rose-pine/neovim'
 
+" Laravel/Blade Support
+Plug 'jwalton512/vim-blade'                                " Blade syntax highlighting
+
 call plug#end()
 
 colorscheme rose-pine
@@ -145,6 +148,12 @@ require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true,
     disable = {} 
+  },
+  ensure_installed = {
+    "php",
+    "html",
+    "css",
+    "javascript",
   },
 }
 require'nvim-tree'.setup {
@@ -220,6 +229,7 @@ require('telescope').setup{
       "^node_modules/",
       "^vendor/",
       "^storage/framework/",
+      "^storage/logs/",
     },
     cache_picker = {
       num_pickers = 3,
