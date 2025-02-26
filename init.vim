@@ -245,7 +245,6 @@ require('telescope').setup{
   }
 }
 require("tokyonight").setup({
-    style = "moon",
     transparent = false,
     styles = {
         sidebars = "dark",
@@ -263,14 +262,8 @@ require("tokyonight").setup({
         colors.bg_statusline = "#000000"
     end,
     on_highlights = function(hl, c)
-        hl.phpDocTags = {
+        hl['@comment.php'] = {
             fg = "#636da6"
-        }
-        hl.phpVarSelector = {
-            fg = "#c099ff"
-        }
-        hl.phpDefine = {
-            fg = "#c099ff"
         }
     end
 })
@@ -302,8 +295,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
+" Use K & Ctrl+Space to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> <C-Space> :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -380,5 +374,5 @@ augroup LaravelPint
 augroup END
 
 " Set colorscheme
-colorscheme tokyonight-moon
+colorscheme tokyonight-night
 
