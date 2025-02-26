@@ -250,6 +250,9 @@ require("tokyonight").setup({
     styles = {
         sidebars = "dark",
         floats = "dark",
+        keywords = { 
+            italic = false 
+        } 
     },
     on_colors = function(colors)
         colors.bg = "#000000"
@@ -258,6 +261,17 @@ require("tokyonight").setup({
         colors.bg_popup = "#000000"
         colors.bg_sidebar = "#000000"
         colors.bg_statusline = "#000000"
+    end,
+    on_highlights = function(hl, c)
+        hl.phpDocTags = {
+            fg = "#636da6"
+        }
+        hl.phpVarSelector = {
+            fg = "#c099ff"
+        }
+        hl.phpDefine = {
+            fg = "#c099ff"
+        }
     end
 })
 EOF
