@@ -19,6 +19,7 @@ let g:coc_global_extensions = [
   \ 'coc-html-css-support',
   \ 'coc-jsref',
   \ 'coc-json',
+  \ 'coc-format-json',
   \ 'coc-marketplace',
   \ 'coc-php-cs-fixer',
   \ 'coc-prettier',
@@ -337,6 +338,32 @@ endfunction
 
 " Clear search highlighting with <Esc>
 nnoremap <Esc> :noh<CR>
+
+" Replace php-cs-fixer with Pint
+command! -nargs=0 Pint :call CocAction('runCommand', 'editor.action.formatDocument')
+
+" Create a function to use Pint for formatting
+function! PintFormat()
+  if filereadable('./vendor/bin/pint')
+    let current_file = expand('%:p')
+    silent execute '!./vendor/bin/pint ' . current_file
+    edit!
+  else
+    echo "Pint not found in this project"
+  endif
+endfunction
+
+" Add mapping for Pint formatting
+nnoremap <leader>pf :call PintFormat()<CR>
+
+" Optional: Replace the existing formatter mapping with Pint
+"nnoremap <leader>fm :call PintFormat()<CR>
+
+" Auto-detect Laravel projects and use Pint on save
+augroup LaravelPint
+  autocmd!
+  autocmd BufWritePre *.php if filereadable('./artisan') && filereadable('./vendor/bin/pint') | call PintFormat() | endif
+augroup END
 
 " Set colorscheme
 colorscheme tokyonight-moon
