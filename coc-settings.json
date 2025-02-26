@@ -1,0 +1,64 @@
+{
+  "coc.preferences.formatOnSave": true,
+  "diagnostic.checkCurrentLine": true,
+  "intelephense.files.maxSize": 5000000,
+  "intelephense.stubs": [
+    "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", 
+    "curl", "date", "dba", "dom", "enchant", "exif", "fileinfo", "filter", 
+    "fpm", "ftp", "gd", "hash", "iconv", "imap", "intl", "json", "ldap", 
+    "libxml", "mbstring", "mcrypt", "meta", "mysql", "mysqli", "oci8", 
+    "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", 
+    "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "posix", "pspell", 
+    "readline", "recode", "Reflection", "regex", "session", "shmop", 
+    "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", 
+    "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", 
+    "tokenizer", "wddx", "xml", "xmlreader", "xmlrpc", "xmlwriter", 
+    "xsl", "Zend OPcache", "zip", "zlib",
+  ],
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
+  "intelephense.completion.insertUseDeclaration": true,
+  "intelephense.trace.server": "messages",
+  "languageserver": {
+    "intelephense": {
+      "args": ["--stdio"],
+      "command": "intelephense",
+      "filetypes": ["php"],
+      "rootPatterns": ["composer.json", ".git/", "artisan"],
+      "settings": {
+        "intelephense": {
+          "files": {
+            "maxSize": 5000000,
+            "associations": ["*.php", "*.phtml", "*.blade.php"],
+            "exclude": [
+              "**/.git/**",
+              "**/.svn/**",
+              "**/.hg/**",
+              "**/CVS/**",
+              "**/.DS_Store/**",
+              "**/node_modules/**",
+              "**/bower_components/**",
+              "**/vendor/**/{Tests,tests}/**",
+              "**/.history/**",
+              "**/vendor/**/vendor/**",
+              "**/storage/**"
+            ]
+          },
+          "environment": {
+            "phpVersion": "8.2"
+          },
+          "completion": {
+            "triggerParameterHints": true,
+            "maxItems": 100
+          },
+          "diagnostics": {
+            "run": "onType",
+            "enable": true
+          }
+        }
+      }
+    }
+  },
+  "php-cs-fixer.enable": false,
+  "prettier.disableLanguages": ["php"],
+  "workspace.rootPatterns": [".git", "artisan", "composer.json"]
+}
