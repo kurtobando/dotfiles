@@ -117,7 +117,7 @@ Plug 'nvim-lua/plenary.nvim'                                " Required by many p
 
 " Completion and Intelligence
 Plug 'neoclide/coc.nvim', {'branch': 'release'}             " Code completion
-Plug 'github/copilot.vim'                                   " AI code suggestions
+"Plug 'github/copilot.vim'                                   " AI code suggestions
 
 " File Navigation and Explorer
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }    " Fuzzy finder
