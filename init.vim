@@ -120,6 +120,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}             " Code completion
 "Plug 'github/copilot.vim'                                   " AI code suggestions
 
 " File Navigation and Explorer
+Plug 'nvim-lualine/lualine.nvim'                            " Status line
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }    " Fuzzy finder
 Plug 'nvim-telescope/telescope-fzy-native.nvim'             " Better sorting performance
 Plug 'nvim-telescope/telescope-file-browser.nvim'           " Better file browsing
@@ -146,6 +147,7 @@ call plug#end()
 " Lua Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua <<EOF
+require('lualine').setup()
 require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true,
