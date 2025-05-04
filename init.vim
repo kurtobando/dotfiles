@@ -127,6 +127,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'           " Better file browsi
 Plug 'nvim-tree/nvim-tree.lua'                              " File explorer
 Plug 'nvim-tree/nvim-web-devicons'                          " Icons for nvim-tree
 Plug 'tpope/vim-surround'                                   " Surround text objects
+Plug 'ray-x/lsp_signature.nvim'                             " Show signature
 
 " Syntax and Language
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
