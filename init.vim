@@ -129,6 +129,9 @@ Plug 'nvim-tree/nvim-web-devicons'                          " Icons for nvim-tre
 Plug 'tpope/vim-surround'                                   " Surround text objects
 Plug 'ray-x/lsp_signature.nvim'                             " Show signature
 
+" Git Integration
+Plug 'lewis6991/gitsigns.nvim'                              " Git signs in the gutter
+
 " Syntax and Language
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
 
@@ -140,7 +143,7 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of mini
 Plug 'folke/tokyonight.nvim'                                " Color scheme
 
 " Laravel/Blade Support
-Plug 'jwalton512/vim-blade'                                " Blade syntax highlighting
+Plug 'jwalton512/vim-blade'                                 " Blade syntax highlighting
 
 call plug#end()
 
