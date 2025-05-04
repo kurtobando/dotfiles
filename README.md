@@ -58,7 +58,11 @@ Before starting, make sure you have the following installed:
    # For Windows
    choco install ripgrep
    ```
-
+5. (Optional) Github Copilot. If you want to use Copilot, you can follow the installation setup. https://github.com/github/copilot.vim
+    ```bash
+    # Start setup
+    :Copilot setup
+    ```
 ## Installation
 
 1. First, install vim-plug (Plugin Manager):
