@@ -18,10 +18,7 @@ let g:coc_global_extensions = [
   \ 'coc-html-css-support',
   \ 'coc-jsref',
   \ 'coc-json',
-  \ 'coc-format-json',
   \ 'coc-marketplace',
-  \ 'coc-php-cs-fixer',
-  \ 'coc-prettier',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
   \ 'coc-tsserver-dev',
@@ -162,6 +159,11 @@ require'nvim-treesitter.configs'.setup{
     "html",
     "css",
     "javascript",
+    "typescript",
+    "json",
+    "lua",
+    "python",
+    "bash"
   },
 }
 require'nvim-tree'.setup {
@@ -292,76 +294,48 @@ require("tokyonight").setup({
         }
     end
 })
+
+-- Helper function for Prettier configuration
+local function get_prettier_config()
+  return {
+    exe = 'prettier',
+    args = {
+      '--stdin-filepath',
+      vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+      '--single-quote',
+    },
+    stdin = true,
+    try_node_modules = true,
+  }
+end
+
 require('formatter').setup({
   logging = true,
   log_level = vim.log.levels.WARN,
   filetype = {
+    javascript = { get_prettier_config },
+    typescript = { get_prettier_config },
+    json = { get_prettier_config },
+    vue = { get_prettier_config },
+    html = { get_prettier_config },
+    css = { get_prettier_config },
+
     php = {
       function()
-        local util = require('formatter.util')
-        if vim.fn.filereadable('./vendor/bin/pint') == 1 then
-          return {
-            exe = './vendor/bin/pint',
-            args = {util.escape_path(util.get_current_buffer_file_path())},
-            stdin = false,
-          }
-        else
-          return {
-            exe = 'php-cs-fixer',
-            args = {
-              'fix',
-              util.escape_path(util.get_current_buffer_file_path()),
-              '--rules=@PSR12',
-              '--allow-risky=yes',
-            },
-            stdin = false,
-            try_node_modules = true,
-          }
-        end
-      end,
-    },
-
-    json = {
-      function()
+        vim.lsp.buf.format()
         return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--single-quote',
-          },
-          stdin = true,
-          try_node_modules = true,
+          exe = "true",
+          stdin = false,
         }
-      end,
+      end
     },
 
-    html = {
+    python = {
       function()
         return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--single-quote',
-          },
+          exe = 'black',
+          args = {'-', '--quiet'},
           stdin = true,
-          try_node_modules = true,
-        }
-      end,
-    },
-
-    css = {
-      function()
-        return {
-          exe = 'prettier',
-          args = {
-            '--stdin-filepath',
-            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-            '--single-quote',
-          },
-          stdin = true,
-          try_node_modules = true,
         }
       end,
     },
@@ -375,25 +349,9 @@ require('formatter').setup({
             '-bn',
             '-ci',
             '-sr',
+            '-',
           },
           stdin = true,
-        }
-      end,
-    },
-
-    vim = {
-      function()
-        return {
-          exe = 'trim_whitespace',
-          args = {},
-          stdin = false,
-          transform = function(text)
-            return vim.split(text, '\n')
-              :map(function(line)
-                return line:gsub('%s+$', '')
-              end)
-              :join('\n')
-          end
         }
       end,
     },
@@ -411,6 +369,10 @@ require('formatter').setup({
           stdin = true,
         }
       end,
+    },
+
+    vim = {
+      require('formatter.filetypes.any').remove_trailing_whitespace,
     },
 
     ["*"] = {
@@ -497,8 +459,11 @@ nnoremap <Esc> :noh<CR>
 nnoremap <silent> <leader>f :Format<CR>
 nnoremap <silent> <leader>F :FormatWrite<CR>
 
+" Custom keymappings for PHP formatting
+augroup PHPFormatting
+  autocmd!
+  autocmd FileType php nnoremap <buffer> <leader>f :call CocAction('format')<CR>
+augroup END
+
 " Set colorscheme
 colorscheme tokyonight-night
-
-
-
