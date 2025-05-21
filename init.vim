@@ -163,7 +163,8 @@ require'nvim-treesitter.configs'.setup{
     "json",
     "lua",
     "python",
-    "bash"
+    "bash",
+    "yaml"
   },
 }
 require'nvim-tree'.setup {
@@ -319,6 +320,8 @@ require('formatter').setup({
     vue = { get_prettier_config },
     html = { get_prettier_config },
     css = { get_prettier_config },
+    yaml = { get_prettier_config },
+    yml = { get_prettier_config },
 
     php = {
       function()
