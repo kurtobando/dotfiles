@@ -221,9 +221,18 @@ require('mini.move').setup({
 require("bufferline").setup{}
 require('telescope').setup{
   defaults = {
-    file_sorter = require('telescope.sorters').get_fzy_sorter,
-    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
-    vimgrep_arguments = {
+    live_grep = {
+      additional_args = function()
+        return {
+          "--max-columns=150",
+          "--glob=!*.lock",
+          "--max-columns-preview",
+          "--hidden",
+          "--no-ignore-vcs",
+        }
+      end
+   },
+   vimgrep_arguments = {
       'rg',
       '--color=never',
       '--no-heading',
@@ -231,7 +240,16 @@ require('telescope').setup{
       '--line-number',
       '--column',
       '--smart-case',
+      '--type-not=lock',
+      '--type-not=sql',
+      '--type-not=json',
+      '--hidden',
+      '--glob=!.git/*',
+      '--glob=!node_modules/*',
+      '--glob=!vendor/*',
     },
+    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
     file_ignore_patterns = {
       "^.git/",
       "^node_modules/",
@@ -239,10 +257,11 @@ require('telescope').setup{
       "^storage/framework/",
       "^storage/logs/",
     },
+     debounce = 100,
     cache_picker = {
-      num_pickers = 3,
-      limit_entries = 300,
-    },
+      num_pickers = 5,
+      limit_entries = 1000,
+    }
   },
   pickers = {
     find_files = {
