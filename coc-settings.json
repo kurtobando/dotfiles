@@ -76,6 +76,8 @@
   ],
   "intelephense.phpdoc.returnVoid": true,
   "intelephense.phpdoc.textFormat": "snippet",
+  "intelephense.enable": true,
+  "intelephense.diagnostics.run": "onSave",
   "intelephense.diagnostics.undefinedMethods": true,
   "intelephense.diagnostics.undefinedTypes": true,
   "intelephense.diagnostics.undefinedFunctions": true,
@@ -89,13 +91,28 @@
   "intelephense.diagnostics.unexpectedTokens": true,
   "intelephense.diagnostics.unusedSymbols": true,
   "intelephense.files.maxSize": 5000000,
+  "intelephense.files.associations": ["*.php", "*.phtml", "*.blade.php"],
   "intelephense.format.enable": true,
   "intelephense.format.braces": "psr12",
-  "intelephense.format.insertSpaces": true,
-  "intelephense.format.tabSize": 4,
-  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
   "intelephense.completion.insertUseDeclaration": true,
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
+  "intelephense.completion.triggerParameterHints": true,
+  "intelephense.completion.maxItems": 100,
   "intelephense.trace.server": "messages",
+  "intelephense.rename.exclude": ["**/vendor/**"],
+  "intelephense.references.exclude": ["**/vendor/**"],
+  "intelephense.phpdoc.classTemplate": {
+    "summary": "$1",
+    "tags": ["@package ${1:$SYMBOL_NAMESPACE}"]
+  },
+  "intelephense.phpdoc.functionTemplate": {
+    "summary": "$1",
+    "tags": [
+      "@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2",
+      "@return ${1:$SYMBOL_TYPE} $2",
+      "@throws ${1:$SYMBOL_TYPE} $2"
+    ]
+  },
   "languageserver": {
     "intelephense": {
       "args": ["--stdio"],
@@ -106,7 +123,7 @@
         "intelephense": {
           "files": {
             "maxSize": 5000000,
-            "associations": ["*.php", "*.phtml", "*.blade.php"],
+            "associations": ["*.php", "*.phtml", "*.blade.php", "*.twig"],
             "exclude": [
               "**/.git/**",
               "**/.svn/**",
@@ -139,5 +156,12 @@
       }
     }
   },
-  "workspace.rootPatterns": [".git", "artisan", "composer.json"]
+  "workspace.rootPatterns": [".git", "artisan", "composer.json"],
+  "workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**",
+    "$HOME/pkg/mod/**",
+    "$HOMEBREW_PREFIX/**"
+  ]
 }
