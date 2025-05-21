@@ -58,11 +58,34 @@ Before starting, make sure you have the following installed:
    # For Windows
    choco install ripgrep
    ```
-5. (Optional) Github Copilot. If you want to use Copilot, you can follow the installation setup. https://github.com/github/copilot.vim
+
+5. Code formatters (for formatter.nvim):
+   ```bash
+   # For PHP (Laravel Pint comes with projects, otherwise use PHP-CS-Fixer)
+   composer global require friendsofphp/php-cs-fixer
+
+   # For JSON, HTML, CSS (Prettier)
+   npm install -g prettier
+
+   # For Bash/Shell (shfmt)
+   # macOS
+   brew install shfmt
+   # Linux/Others
+   go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
+   # For Lua (StyLua)
+   # macOS
+   brew install stylua
+   # Others
+   cargo install stylua
+   ```
+
+6. (Optional) Github Copilot. If you want to use Copilot, you can follow the installation setup. https://github.com/github/copilot.vim
     ```bash
     # Start setup
     :Copilot setup
     ```
+
 ## Installation
 
 1. First, install vim-plug (Plugin Manager):
@@ -114,6 +137,7 @@ Before starting, make sure you have the following installed:
 - 📦 Auto-pairs and surround functionality
 - 🔄 Better syntax highlighting (TreeSitter)
 - ⚡ Fast and efficient performance optimizations
+- 🔨 Powerful multi-language code formatting (formatter.nvim)
 
 ## Key Mappings
 
@@ -143,6 +167,10 @@ Space is the leader key. Here are some essential keybindings to get you started:
 - `Tab` - Navigate completion menu
 - `Enter` - Select completion
 
+### Code Formatting
+- `<Space>f` - Format current buffer
+- `<Space>F` - Format and save
+
 ### Copilot
 - `Ctrl + J` - Accept suggestion
 - `Ctrl + n` - Next suggestion
@@ -151,7 +179,21 @@ Space is the leader key. Here are some essential keybindings to get you started:
 
 ### Code Actions
 - `<Space>ac` - Code action menu
-- `<Space>fm` - Format file
+
+## Supported Languages and Formatters
+
+The configuration includes formatting support for:
+
+| Language | Formatter | Notes |
+|----------|-----------|-------|
+| PHP | Laravel Pint / PHP-CS-Fixer | Automatically uses Pint in Laravel projects |
+| JSON | Prettier | |
+| HTML | Prettier | |
+| CSS | Prettier | |
+| Bash/Shell | shfmt | |
+| Vim | Built-in | Removes trailing whitespace |
+| Lua | StyLua | |
+| Others | Built-in | Removes trailing whitespace |
 
 ## Customization
 
@@ -182,6 +224,11 @@ The configuration includes:
    - Verify that ripgrep is installed
    - Run `rg --version` in your terminal to confirm
 
+5. If code formatting isn't working:
+   - Check if the required formatters are installed
+   - For PHP in Laravel projects, make sure `./vendor/bin/pint` exists
+   - Run `:messages` to see if there are any error messages
+
 For more detailed troubleshooting, check the error messages in:
 - `:messages`
 - `:CocInfo`
@@ -192,4 +239,4 @@ For more detailed troubleshooting, check the error messages in:
 If you encounter any issues:
 1. Run `:checkhealth` inside Neovim to diagnose common problems
 2. Check if all prerequisites are installed correctly
-3. Make sure your Neovim version is 0.8.0 or higher (`:version`)
+3. Make sure your Neovim version is 0.8.0 or higher (`:version`). Make sure your Neovim version is 0.8.0 or higher (`:version`)
