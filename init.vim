@@ -155,7 +155,7 @@ require('lualine').setup()
 require'nvim-treesitter.configs'.setup{
   highlight = {
     enable = true,
-    disable = {} 
+    disable = {}
   },
   ensure_installed = {
     "php",
@@ -182,7 +182,7 @@ require'nvim-tree'.setup {
       ".DS_Store",
       -- Add any other patterns you want to hide
     },
-    exclude = {}, 
+    exclude = {},
   },
   git = {
     enable = false,  -- Disable git integration to prevent gitignore rules
@@ -274,9 +274,9 @@ require("tokyonight").setup({
     styles = {
         sidebars = "dark",
         floats = "dark",
-        keywords = { 
-            italic = false 
-        } 
+        keywords = {
+            italic = false
+        }
     },
     on_colors = function(colors)
         colors.bg = "#000000"
@@ -291,6 +291,132 @@ require("tokyonight").setup({
             fg = "#636da6"
         }
     end
+})
+require('formatter').setup({
+  logging = true,
+  log_level = vim.log.levels.WARN,
+  filetype = {
+    php = {
+      function()
+        local util = require('formatter.util')
+        if vim.fn.filereadable('./vendor/bin/pint') == 1 then
+          return {
+            exe = './vendor/bin/pint',
+            args = {util.escape_path(util.get_current_buffer_file_path())},
+            stdin = false,
+          }
+        else
+          return {
+            exe = 'php-cs-fixer',
+            args = {
+              'fix',
+              util.escape_path(util.get_current_buffer_file_path()),
+              '--rules=@PSR12',
+              '--allow-risky=yes',
+            },
+            stdin = false,
+            try_node_modules = true,
+          }
+        end
+      end,
+    },
+
+    json = {
+      function()
+        return {
+          exe = 'prettier',
+          args = {
+            '--stdin-filepath',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--single-quote',
+          },
+          stdin = true,
+          try_node_modules = true,
+        }
+      end,
+    },
+
+    html = {
+      function()
+        return {
+          exe = 'prettier',
+          args = {
+            '--stdin-filepath',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--single-quote',
+          },
+          stdin = true,
+          try_node_modules = true,
+        }
+      end,
+    },
+
+    css = {
+      function()
+        return {
+          exe = 'prettier',
+          args = {
+            '--stdin-filepath',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--single-quote',
+          },
+          stdin = true,
+          try_node_modules = true,
+        }
+      end,
+    },
+
+    sh = {
+      function()
+        return {
+          exe = 'shfmt',
+          args = {
+            '-i', '2',
+            '-bn',
+            '-ci',
+            '-sr',
+          },
+          stdin = true,
+        }
+      end,
+    },
+
+    vim = {
+      function()
+        return {
+          exe = 'trim_whitespace',
+          args = {},
+          stdin = false,
+          transform = function(text)
+            return vim.split(text, '\n')
+              :map(function(line)
+                return line:gsub('%s+$', '')
+              end)
+              :join('\n')
+          end
+        }
+      end,
+    },
+
+    lua = {
+      function()
+        return {
+          exe = 'stylua',
+          args = {
+            '--search-parent-directories',
+            '--stdin-filepath',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--', '-',
+          },
+          stdin = true,
+        }
+      end,
+    },
+
+    ["*"] = {
+      require("formatter.filetypes.any").remove_trailing_whitespace,
+    }
+  }
 })
 EOF
 
@@ -373,7 +499,6 @@ nnoremap <silent> <leader>F :FormatWrite<CR>
 
 " Set colorscheme
 colorscheme tokyonight-night
-
 
 
 
