@@ -1,4 +1,3 @@
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set global extensions for CoC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -132,8 +131,9 @@ Plug 'ray-x/lsp_signature.nvim'                             " Show signature
 " Git Integration
 Plug 'lewis6991/gitsigns.nvim'                              " Git signs in the gutter
 
-" Syntax and Language
+" Syntax and Language, then Formatter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
+Plug 'mhartington/formatter.nvim'
 
 " UI Enhancements
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }              " Buffer line
@@ -321,9 +321,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K & Ctrl+Space to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-nnoremap <silent> <C-Space> :call ShowDocumentation()<CR>
-
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
@@ -331,6 +328,8 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> <C-Space> :call ShowDocumentation()<CR>
 
 " Coc code actions
 nmap <leader>ac <Plug>(coc-codeaction)
@@ -350,10 +349,11 @@ imap <silent> <C-p> <Plug>(copilot-previous)
 imap <silent> <C-\> <Plug>(copilot-dismiss)
 let g:copilot_no_tab_map = v:true
 
-" Keymap to format the current file
-nnoremap <leader>fm :call CocAction('format')<CR>
-
 " Use <TAB> to navigate through popup menu"
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -364,40 +364,16 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 " Clear search highlighting with <Esc>
 nnoremap <Esc> :noh<CR>
 
-" Replace php-cs-fixer with Pint
-command! -nargs=0 Pint :call CocAction('runCommand', 'editor.action.formatDocument')
-
-" Create a function to use Pint for formatting
-function! PintFormat()
-  if filereadable('./vendor/bin/pint')
-    let current_file = expand('%:p')
-    silent execute '!./vendor/bin/pint ' . current_file
-    edit!
-  else
-    echo "Pint not found in this project"
-  endif
-endfunction
-
-" Add mapping for Pint formatting
-nnoremap <leader>pf :call PintFormat()<CR>
-
-" Optional: Replace the existing formatter mapping with Pint
-"nnoremap <leader>fm :call PintFormat()<CR>
-
-" Auto-detect Laravel projects and use Pint on save
-augroup LaravelPint
-  autocmd!
-  autocmd BufWritePre *.php if filereadable('./artisan') && filereadable('./vendor/bin/pint') | call PintFormat() | endif
-augroup END
+" Format code with <leader>f
+nnoremap <silent> <leader>f :Format<CR>
+nnoremap <silent> <leader>F :FormatWrite<CR>
 
 " Set colorscheme
 colorscheme tokyonight-night
+
+
+
 
