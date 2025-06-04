@@ -479,8 +479,7 @@ nnoremap <silent> <leader>f :Format<CR>
 nnoremap <silent> <leader>F :FormatWrite<CR>
 
 " Format selected code 
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
+xmap <leader>fs <Plug>(coc-format-selected)
 
 " Show all diagnostics
 nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
