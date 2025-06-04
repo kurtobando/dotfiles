@@ -163,5 +163,6 @@
     "$HOME/.rustup/**",
     "$HOME/pkg/mod/**",
     "$HOMEBREW_PREFIX/**"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }

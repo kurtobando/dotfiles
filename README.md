@@ -142,6 +142,7 @@ Space is the leader key. Here are some essential keybindings to get you started:
 -   `<Space>ff` - Find files (Telescope)
 -   `<Space>fg` - Live grep (search in files with Telescope)
 -   `<Space>fb` - Browse buffers (Telescope)
+-   `<Space>fh` - Browse help tags (Telescope)
 -   `<Space>e` - Toggle file explorer (nvim-tree)
 
 ### Code Navigation
@@ -150,6 +151,17 @@ Space is the leader key. Here are some essential keybindings to get you started:
 -   `gi` - Go to implementation (CoC)
 -   `gr` - Find references (CoC)
 -   `K` or `<C-Space>` (in Normal mode) - Show documentation/hover (CoC)
+
+### Code Editing & Refactoring
+-   `<Space>rn` - Rename symbol (CoC)
+-   `<Space>ac` - Code action menu
+-   `<Space>aC` - Code action menu at cursor
+-   `<Space>ac` (in Visual mode) - Code action for selected region
+
+### Diagnostics & Debugging
+-   `<Space>a` - Show all diagnostics (CoC)
+-   `[g` - Go to previous diagnostic
+-   `]g` - Go to next diagnostic
 
 ### Window Management
 -   `Ctrl + Up/Down/Left/Right` - Navigate between windows
@@ -175,10 +187,10 @@ Space is the leader key. Here are some essential keybindings to get you started:
 -   `Ctrl + p` - Previous suggestion
 -   `Ctrl + \` - Dismiss suggestion
 
-### Code Actions (CoC)
--   `<Space>ac` - Code action menu
--   `<Space>aC` - Code action menu at cursor
--   `<Space>ac` (in Visual mode) - Code action for selected region
+### Search & Navigation
+-   `Esc` - Clear search highlighting
+-   `<Space>c` - Show CoC commands
+-   `<Space>o` - Show symbols/outline (CoC)
 
 ## Supported Languages and Formatters
 

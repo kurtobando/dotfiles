@@ -24,8 +24,11 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver-dev',
   \ 'coc-vimlsp',
   \ 'coc-yaml',
+  \ 'coc-snippets',
   \ ]
 
+" Add CoC-specific performance settings
+let g:coc_node_args = ['--max-old-space-size=8192']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,6 +391,10 @@ EOF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keymaps
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Telescope 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -458,9 +465,24 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 " Clear search highlighting with <Esc>
 nnoremap <Esc> :noh<CR>
 
-" Format code with <leader>f
+" Format entire file
 nnoremap <silent> <leader>f :Format<CR>
 nnoremap <silent> <leader>F :FormatWrite<CR>
+
+" Format selected code 
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
+" Show all diagnostics
+nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Show commands
+nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+
+" Show symbols
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
 
 " Custom keymappings for PHP formatting
 augroup PHPFormatting
