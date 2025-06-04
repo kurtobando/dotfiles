@@ -4,7 +4,7 @@ Hey there! 👋 This is my carefully crafted Neovim configuration that I've been
 
 What makes it special? It's got everything I need for Laravel work - from super-smart PHP completion (thanks to Intelephense via CoC) to Blade template support, and it handles all those little things that used to slow me down. And yes, it works great with Tailwind CSS too!
 
-I originally built this for myself, but figured it might help other Laravel devs who want to give Neovim a shot. Trust me, once you get this set up, you'll wonder how you ever coded Laravel projects without it.
+I originally built this for myself, but figured it might help other Laravel devs who want to give Neovim a shot. Feel free to fork this repository and customize it to your liking.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ Before starting, make sure you have the following installed:
     ```
 
 5.  Code formatters (for `formatter.nvim` and PHP LSP formatting):
-    *   **PHP**: Formatting is handled by **Intelephense** (via CoC language server), configured to PSR-12. Ensure `@yaegassy/coc-intelephense` CoC extension is installed. You can still use project-specific tools like Laravel Pint or PHP-CS-Fixer independently.
+    *   **PHP**: Formatting is handled by **Intelephense** (via CoC language server). Its style (e.g., brace style set to `per`, which is K&R style) is configured within `coc-settings.json` (see `intelephense.format.braces`). Ensure `@yaegassy/coc-intelephense` CoC extension is installed. You can still use project-specific tools like Laravel Pint or PHP-CS-Fixer independently.
     ```bash
     # Example: If you want PHP-CS-Fixer globally for other uses
     # composer global require friendsofphp/php-cs-fixer
@@ -175,8 +175,13 @@ Space is the leader key. Here are some essential keybindings to get you started:
 -   `Enter` - Select completion
 
 ### Code Formatting
--   `<Space>f` - Format current buffer (uses `formatter.nvim` or CoC for PHP)
--   `<Space>F` - Format current buffer and save
+-   `<Space>f` - Format current buffer:
+    -   For PHP files: Uses CoC/Intelephense (due to an `autocmd` calling `CocAction('format')`).
+    -   For other filetypes: Uses `formatter.nvim` (via the `:Format` command).
+-   `<Space>F` - Format current buffer and save:
+    -   For PHP files: Uses CoC/Intelephense (as `formatter.nvim`'s PHP setup calls `vim.lsp.buf.format()`) and then saves.
+    -   For other filetypes: Uses `formatter.nvim` (via the `:FormatWrite` command) and then saves.
+-   `<Space>fs` (in Visual mode) - Format selected region using CoC (`<Plug>(coc-format-selected)`).
 
 ### Line & Selection Moving (`mini.move`)
 -   `Ctrl + Shift + Up/Down/Left/Right` - Move current line or visual selection
@@ -198,7 +203,7 @@ The configuration includes formatting support for:
 
 | Language   | Formatter / Method       | Notes                                                     |
 |------------|--------------------------|-----------------------------------------------------------|
-| PHP        | Intelephense (via CoC)   | Uses LSP formatting, configured to PSR-12 in `coc-settings.json`. |
+| PHP        | Intelephense (via CoC)   | Uses LSP formatting. Style (e.g., brace style `per`) configured in `coc-settings.json`. |
 | JavaScript | Prettier                 | Via `formatter.nvim`                                      |
 | TypeScript | Prettier                 | Via `formatter.nvim`                                      |
 | JSON       | Prettier                 | Via `formatter.nvim`                                      |
@@ -250,7 +255,9 @@ The configuration includes:
         *   Formatting is handled by the Intelephense language server. Check `:CocInfo` for LSP status and `:CocOpenLog` for Intelephense-specific messages or errors.
         *   The `coc-settings.json` file configures Intelephense; ensure it's loaded.
     *   For other languages (using `formatter.nvim`):
-        *   Run `:FormatWrite` or `:Format` and then check `:messages` for any errors from `formatter.nvim`.
+        *   The keymaps `<Space>f` (runs `:Format`) and `<Space>F` (runs `:FormatWrite` and saves) use `formatter.nvim` for full buffer formatting.
+        *   For formatting a visual selection, use `<Space>fs` which uses CoC.
+        *   If `formatter.nvim` isn't working as expected with `<Space>f` or `<Space>F`, check `:messages` for any errors from `formatter.nvim`.
         *   You can increase `formatter.nvim` log level in `init.vim` for more details if needed.
 
 6.  **UI Elements (Lualine, Bufferline) Missing/Broken**:
