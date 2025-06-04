@@ -340,7 +340,7 @@ require('formatter').setup({
 
     php = {
       function()
-        vim.lsp.buf.format()
+        vim.fn.CocAction('format')
         return {
           exe = "true",
           stdin = false,
@@ -495,11 +495,7 @@ nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
 " Show symbols
 nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
 
-" Custom keymappings for PHP formatting
-augroup PHPFormatting
-  autocmd!
-  autocmd FileType php nnoremap <buffer> <leader>f :call CocAction('format')<CR>
-augroup END
+
 
 " Set colorscheme
 colorscheme tokyonight-night

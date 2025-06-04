@@ -175,12 +175,10 @@ Space is the leader key. Here are some essential keybindings to get you started:
 -   `Enter` - Select completion
 
 ### Code Formatting
--   `<Space>f` - Format current buffer:
-    -   For PHP files: Uses CoC/Intelephense (due to an `autocmd` calling `CocAction('format')`).
-    -   For other filetypes: Uses `formatter.nvim` (via the `:Format` command).
--   `<Space>F` - Format current buffer and save:
-    -   For PHP files: Uses CoC/Intelephense (as `formatter.nvim`'s PHP setup calls `vim.lsp.buf.format()`) and then saves.
-    -   For other filetypes: Uses `formatter.nvim` (via the `:FormatWrite` command) and then saves.
+-   `<Space>f` - Format current buffer using `formatter.nvim` (via the `:Format` command):
+    -   For PHP files: Uses Intelephense formatting via CoC (`vim.fn.CocAction('format')`)
+    -   For other filetypes: Uses their respective formatters (Prettier, Black, StyLua, etc.)
+-   `<Space>F` - Format current buffer and save using `formatter.nvim` (via the `:FormatWrite` command)
 -   `<Space>fs` (in Visual mode) - Format selected region using CoC (`<Plug>(coc-format-selected)`).
 
 ### Line & Selection Moving (`mini.move`)
@@ -203,7 +201,7 @@ The configuration includes formatting support for:
 
 | Language   | Formatter / Method       | Notes                                                     |
 |------------|--------------------------|-----------------------------------------------------------|
-| PHP        | Intelephense (via CoC)   | Uses LSP formatting. Style (e.g., brace style `per`) configured in `coc-settings.json`. |
+| PHP        | Intelephense (via CoC)   | Uses CoC formatting (`vim.fn.CocAction('format')`). Style (e.g., brace style `per`) configured in `coc-settings.json`. |
 | JavaScript | Prettier                 | Via `formatter.nvim`                                      |
 | TypeScript | Prettier                 | Via `formatter.nvim`                                      |
 | JSON       | Prettier                 | Via `formatter.nvim`                                      |
@@ -248,13 +246,13 @@ The configuration includes:
     *   Verify `ripgrep` (for `live_grep`) and `fd` (for `find_files`, optional but recommended in config) are installed and in your `PATH`.
     *   Run `rg --version` and `fd --version` in your terminal to confirm.
 
-5.  **Code Formatting Isn't Working**:
+4.  **Code Formatting Isn't Working**:
     *   Check if the required global formatters (Prettier, shfmt, Black, StyLua) are installed and in your `PATH`. See "Prerequisites" section.
     *   For PHP:
         *   Ensure `@yaegassy/coc-intelephense` CoC extension is active (`:CocList extensions`).
-        *   Formatting is handled by the Intelephense language server. Check `:CocInfo` for LSP status and `:CocOpenLog` for Intelephense-specific messages or errors.
+        *   PHP formatting uses Intelephense via `formatter.nvim`'s `vim.fn.CocAction('format')` call. Check `:CocInfo` for LSP status and `:CocOpenLog` for Intelephense-specific messages or errors.
         *   The `coc-settings.json` file configures Intelephense; ensure it's loaded.
-    *   For other languages (using `formatter.nvim`):
+    *   For all languages (using `formatter.nvim`):
         *   The keymaps `<Space>f` (runs `:Format`) and `<Space>F` (runs `:FormatWrite` and saves) use `formatter.nvim` for full buffer formatting.
         *   For formatting a visual selection, use `<Space>fs` which uses CoC.
         *   If `formatter.nvim` isn't working as expected with `<Space>f` or `<Space>F`, check `:messages` for any errors from `formatter.nvim`.
