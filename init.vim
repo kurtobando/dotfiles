@@ -263,10 +263,19 @@ require('telescope').setup{
       "^storage/framework/",
       "^storage/logs/",
     },
-     debounce = 100,
+    debounce = 100,
     cache_picker = {
       num_pickers = 5,
       limit_entries = 1000,
+    },
+    sorting_strategy = "ascending",
+    prompt_prefix = "🔍 ",
+    selection_caret = "➤ ",
+    layout_strategy = 'horizontal',
+    layout_config = {
+      horizontal = {
+        preview_width = 0.6,
+      },
     }
   },
   pickers = {
