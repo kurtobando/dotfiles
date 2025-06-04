@@ -25,6 +25,9 @@ let g:coc_global_extensions = [
   \ 'coc-vimlsp',
   \ 'coc-yaml',
   \ 'coc-snippets',
+  \ 'coc-prettier',
+  \ 'coc-format-json',
+  \ 'coc-php-cs-fixer',
   \ ]
 
 " Add CoC-specific performance settings
