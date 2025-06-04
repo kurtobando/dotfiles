@@ -36,10 +36,6 @@
     "pcntl",
     "pcre",
     "PDO",
-    "pdo_ibm",
-    "pdo_mysql",
-    "pdo_pgsql",
-    "pdo_sqlite",
     "pgsql",
     "Phar",
     "posix",
@@ -72,7 +68,9 @@
     "xsl",
     "Zend OPcache",
     "zip",
-    "zlib"
+    "zlib",
+    "redis",
+    "imagick"
   ],
   "intelephense.phpdoc.returnVoid": true,
   "intelephense.phpdoc.textFormat": "snippet",
@@ -90,14 +88,14 @@
   "intelephense.diagnostics.typeErrors": true,
   "intelephense.diagnostics.unexpectedTokens": true,
   "intelephense.diagnostics.unusedSymbols": true,
-  "intelephense.files.maxSize": 5000000,
+  "intelephense.files.maxSize": 10000000,
   "intelephense.files.associations": ["*.php", "*.phtml", "*.blade.php"],
   "intelephense.format.enable": true,
-  "intelephense.format.braces": "psr12",
+  "intelephense.format.braces": "per",
   "intelephense.completion.insertUseDeclaration": true,
   "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
   "intelephense.completion.triggerParameterHints": true,
-  "intelephense.completion.maxItems": 100,
+  "intelephense.completion.maxItems": 50,
   "intelephense.trace.server": "messages",
   "intelephense.rename.exclude": ["**/vendor/**"],
   "intelephense.references.exclude": ["**/vendor/**"],
@@ -164,5 +162,11 @@
     "$HOME/pkg/mod/**",
     "$HOMEBREW_PREFIX/**"
   ],
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enableSign": true,
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.hintSign": "💡"
 }
