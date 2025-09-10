@@ -414,7 +414,7 @@ require('formatter').setup({
 local wk = require("which-key")
 wk.setup({
   preset = "modern",
-  delay = 300,
+  delay = 100,
 })
 
 -- Register keymaps with which-key
@@ -463,7 +463,7 @@ wk.add({
   { "<leader>gm", ":Git merge<CR>", desc = "Git Merge" },
   
   -- Folding mappings
-  -- { "<leader>=", "za", desc = "Toggle Fold" },
+  { "<leader>=", "za", desc = "Toggle Fold" },
   { "<leader>+", "zR", desc = "Open All Folds" },
   { "<leader>-", "zM", desc = "Close All Folds" },
   -- { "<leader>0", "zc", desc = "Close Fold" },
@@ -576,7 +576,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 nnoremap <Esc> :noh<CR>
 
 " Folding keymaps (similar to PhpStorm's Cmd+/Cmd-)
-"nnoremap <leader>= za
+nnoremap <leader>= za
 nnoremap <leader>+ zR
 nnoremap <leader>- zM
 "nnoremap <leader>0 zc
