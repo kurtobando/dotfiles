@@ -351,7 +351,7 @@ require('formatter').setup({
 
     php = {
       function()
-        vim.lsp.buf.format()
+        vim.fn.CocAction('format')
         return {
           exe = "true",
           stdin = false,
@@ -463,11 +463,11 @@ wk.add({
   { "<leader>gm", ":Git merge<CR>", desc = "Git Merge" },
   
   -- Folding mappings
-  { "<leader>=", "za", desc = "Toggle Fold" },
+  -- { "<leader>=", "za", desc = "Toggle Fold" },
   { "<leader>+", "zR", desc = "Open All Folds" },
   { "<leader>-", "zM", desc = "Close All Folds" },
-  { "<leader>0", "zc", desc = "Close Fold" },
-  { "<leader>9", "zo", desc = "Open Fold" },
+  -- { "<leader>0", "zc", desc = "Close Fold" },
+  -- { "<leader>9", "zo", desc = "Open Fold" },
   
   -- Goto mappings
   { "g", group = "goto" },
@@ -576,11 +576,11 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 nnoremap <Esc> :noh<CR>
 
 " Folding keymaps (similar to PhpStorm's Cmd+/Cmd-)
-nnoremap <leader>= za
+"nnoremap <leader>= za
 nnoremap <leader>+ zR
 nnoremap <leader>- zM
-nnoremap <leader>0 zc
-nnoremap <leader>9 zo
+"nnoremap <leader>0 zc
+"nnoremap <leader>9 zo
 
 " Format entire file
 nnoremap <silent> <leader>Ff :Format<CR>
@@ -619,6 +619,5 @@ augroup PHPFormatting
   autocmd!
   autocmd FileType php nnoremap <buffer> <leader>Ff :call CocAction('format')<CR>
 augroup END
-
 " Set colorscheme
 colorscheme tokyonight-night
