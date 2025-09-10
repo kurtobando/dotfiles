@@ -133,6 +133,7 @@ Plug 'ray-x/lsp_signature.nvim'                             " Show signature
 
 " Git Integration
 Plug 'lewis6991/gitsigns.nvim'                              " Git signs in the gutter
+Plug 'tpope/vim-fugitive'                                   " Premier Git integration for Vim
 
 " Syntax and Language, then Formatter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
@@ -438,6 +439,20 @@ wk.add({
   { "<leader>cc", ":<C-u>CocList commands<cr>", desc = "Show Commands" },
   { "<leader>co", ":<C-u>CocList outline<cr>", desc = "Show Symbols Outline" },
   
+  { "<leader>g", group = "git" },
+  { "<leader>gs", ":Git<CR>", desc = "Git Status" },
+  { "<leader>gb", ":Git blame<CR>", desc = "Git Blame" },
+  { "<leader>gd", ":Gdiffsplit<CR>", desc = "Git Diff" },
+  { "<leader>gl", ":Git log<CR>", desc = "Git Log" },
+  { "<leader>gc", ":Git commit<CR>", desc = "Git Commit" },
+  { "<leader>gp", ":Git push<CR>", desc = "Git Push" },
+  { "<leader>gP", ":Git pull<CR>", desc = "Git Pull" },
+  { "<leader>gf", ":Git fetch<CR>", desc = "Git Fetch" },
+  { "<leader>gr", ":Gread<CR>", desc = "Git Read (checkout file)" },
+  { "<leader>gw", ":Gwrite<CR>", desc = "Git Write (stage file)" },
+  { "<leader>ge", ":Gedit<CR>", desc = "Git Edit" },
+  { "<leader>gm", ":Git merge<CR>", desc = "Git Merge" },
+  
   -- Goto mappings
   { "g", group = "goto" },
   { "gd", "<Plug>(coc-definition)", desc = "Go to Definition" },
@@ -550,6 +565,20 @@ nnoremap <silent> <leader>FF :FormatWrite<CR>
 
 " Format selected code 
 xmap <leader>Fs <Plug>(coc-format-selected)
+
+" Git fugitive keybindings
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>gd :Gdiffsplit<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>gP :Git pull<CR>
+nnoremap <leader>gf :Git fetch<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gm :Git merge<CR>
 
 " Show all diagnostics
 nnoremap <silent><nowait> <leader>ca :<C-u>CocList diagnostics<cr>
