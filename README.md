@@ -38,7 +38,26 @@ Before starting, make sure you have the following installed:
     sudo apt install git
     ```
 
-4.  Ripgrep (for better search functionality with Telescope)
+4.  PHP (required for Intelephense language server)
+    ```bash
+    # For macOS
+    brew install php@8.2
+
+    # For Ubuntu/Debian
+    sudo apt install php8.2-cli php8.2-mbstring php8.2-xml
+    ```
+
+5.  Composer (PHP package manager for Laravel development)
+    ```bash
+    # For macOS
+    brew install composer
+
+    # For Ubuntu/Debian
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+    ```
+
+6.  Ripgrep (for better search functionality with Telescope)
     ```bash
     # For macOS
     brew install ripgrep
@@ -47,7 +66,23 @@ Before starting, make sure you have the following installed:
     sudo apt install ripgrep
     ```
 
-5.  Code formatters (for `formatter.nvim` and PHP LSP formatting):
+7.  fd (for faster file finding with Telescope)
+    ```bash
+    # For macOS
+    brew install fd
+
+    # For Ubuntu/Debian
+    sudo apt install fd-find
+    # Note: On Ubuntu/Debian, you may need to alias fd to fdfind
+    # Add to your shell config: alias fd=fdfind
+    ```
+
+8.  Intelephense Language Server (required for PHP code intelligence)
+    ```bash
+    npm install -g intelephense
+    ```
+
+9.  Code formatters (for `formatter.nvim` and PHP LSP formatting):
     *   **PHP**: Formatting is handled by **Intelephense** (via CoC language server). Its style (e.g., brace style set to `per`, which is K&R style) is configured within `coc-settings.json` (see `intelephense.format.braces`). Ensure `@yaegassy/coc-intelephense` CoC extension is installed. You can still use project-specific tools like Laravel Pint or PHP-CS-Fixer independently.
     ```bash
     # Example: If you want PHP-CS-Fixer globally for other uses
@@ -80,7 +115,7 @@ Before starting, make sure you have the following installed:
     pip3 install black
     ```
 
-6.  (Optional) Github Copilot. If you want to use Copilot, you can follow the installation setup. https://github.com/github/copilot.vim
+10. (Optional) Github Copilot. If you want to use Copilot, you can follow the installation setup. https://github.com/github/copilot.vim
     ```bash
     # Start setup
     :Copilot setup
@@ -128,11 +163,12 @@ Before starting, make sure you have the following installed:
 -   🌟 Enhanced status line (Lualine)
 -   ♨️ Git integration in the gutter (Gitsigns)
 -   💡 Function signature help (`lsp_signature.nvim`)
--   📦 Auto-pairs (`mini.pairs`) and surround functionality (`vim-surround`)
--   ↕️ Easy line and visual selection moving (`mini.move`)
--   🔄 Better syntax highlighting (TreeSitter)
--   ⚡ Fast and efficient performance optimizations
+-   📦 Auto-pairs and easy line/selection moving (via `mini.nvim` collection)
+-   🔄 Surround functionality (`vim-surround`)
+-   🌳 Better syntax highlighting (TreeSitter with support for PHP, HTML, CSS, JavaScript, TypeScript, JSON, Lua, Python, Bash, and YAML)
+-   ⚡ Performance optimizations (lazy redraw, optimized regex engine, increased memory limits)
 -   🔨 Powerful multi-language code formatting (`formatter.nvim` for many languages, CoC/Intelephense for PHP)
+-   🔧 PHP-specific tools including `coc-php-cs-fixer` for additional formatting options
 
 ## Key Mappings
 
@@ -227,7 +263,18 @@ The configuration includes:
 -   Mouse support in all modes
 -   System clipboard integration (`unnamedplus`)
 -   Persistent undo history
--   Tokyo Night theme with custom background color set to pure black.
+-   Tokyo Night theme with custom background color set to pure black
+
+## Performance Optimizations
+
+The configuration includes several performance enhancements:
+-   **Lazy redraw** (`lazyredraw`) - Prevents unnecessary screen redraws during macros
+-   **Fast terminal connection** (`ttyfast`) - Optimizes for modern terminals
+-   **Syntax column limit** (`synmaxcol=3000`) - Limits syntax highlighting to 3000 columns for better performance
+-   **Extended redraw time** (`redrawtime=10000`) - Allows more time for syntax highlighting on complex files
+-   **Increased memory limit** (`maxmempattern=2000000`) - Higher memory allocation for pattern matching
+-   **New regex engine** (`re=0`) - Uses the newer, more efficient regex engine
+-   **Optimized completion** (`updatetime=300`) - Faster completion popup response
 
 ## Troubleshooting
 
