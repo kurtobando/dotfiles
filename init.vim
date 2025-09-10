@@ -141,6 +141,7 @@ Plug 'mhartington/formatter.nvim'
 " UI Enhancements
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }              " Buffer line
 Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }        " Collection of minimal plugins
+Plug 'folke/which-key.nvim'                                 " Show keybindings
 
 " Theme
 Plug 'folke/tokyonight.nvim'                                " Color scheme
@@ -398,6 +399,72 @@ require('formatter').setup({
     }
   }
 })
+
+-- Which-key configuration
+local wk = require("which-key")
+wk.setup({
+  preset = "modern",
+  delay = 300,
+})
+
+-- Register keymaps with which-key
+wk.add({
+  -- Leader mappings
+  { "<leader>f", group = "find" },
+  { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+  { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+  { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
+  { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+  
+  { "<leader>F", group = "format" },
+  { "<leader>FF", ":FormatWrite<CR>", desc = "Format and Save" },
+  { "<leader>Ff", ":Format<CR>", desc = "Format File" },
+  
+  { "<leader>e", ":NvimTreeToggle<CR>", desc = "File Explorer" },
+  { "<leader>q", group = "quit" },
+  { "<leader>qq", ":q<CR>", desc = "Quit" },
+  { "<leader>b", group = "buffer" },
+  { "<leader>bd", ":bd<CR>", desc = "Delete Buffer" },
+  
+  { "<leader>a", group = "actions/code" },
+  { "<leader>ac", "<Plug>(coc-codeaction)", desc = "Code Action" },
+  { "<leader>aC", "<Plug>(coc-codeaction-cursor)", desc = "Code Action at Cursor" },
+  
+  { "<leader>r", group = "rename" },
+  { "<leader>rn", "<Plug>(coc-rename)", desc = "Rename Symbol" },
+  
+  { "<leader>c", group = "coc" },
+  { "<leader>ca", ":<C-u>CocList diagnostics<cr>", desc = "Show All Diagnostics" },
+  { "<leader>cc", ":<C-u>CocList commands<cr>", desc = "Show Commands" },
+  { "<leader>co", ":<C-u>CocList outline<cr>", desc = "Show Symbols Outline" },
+  
+  -- Goto mappings
+  { "g", group = "goto" },
+  { "gd", "<Plug>(coc-definition)", desc = "Go to Definition" },
+  { "gy", "<Plug>(coc-type-definition)", desc = "Go to Type Definition" },
+  { "gi", "<Plug>(coc-implementation)", desc = "Go to Implementation" },
+  { "gr", "<Plug>(coc-references)", desc = "Go to References" },
+  
+  -- Navigation mappings
+  { "[b", ":bprevious<CR>", desc = "Previous Buffer" },
+  { "[g", "<Plug>(coc-diagnostic-prev)", desc = "Previous Diagnostic" },
+  { "]b", ":bnext<CR>", desc = "Next Buffer" },
+  { "]g", "<Plug>(coc-diagnostic-next)", desc = "Next Diagnostic" },
+  
+  -- Documentation
+  { "K", ":call ShowDocumentation()<CR>", desc = "Show Documentation" },
+  
+  -- Visual mode mappings
+  { "<leader>ac", "<Plug>(coc-codeaction-selected)", desc = "Code Action on Selection", mode = "v" },
+  { "<leader>Fs", "<Plug>(coc-format-selected)", desc = "Format Selected", mode = "v" },
+  
+  -- Insert mode Copilot mappings
+  { "<C-J>", desc = "Accept Copilot suggestion", mode = "i" },
+  { "<C-n>", desc = "Next Copilot suggestion", mode = "i" },
+  { "<C-p>", desc = "Previous Copilot suggestion", mode = "i" },
+  { "<C-\\>", desc = "Dismiss Copilot", mode = "i" },
+  { "<C-Space>", desc = "Trigger completion", mode = "i" },
+})
 EOF
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -478,27 +545,27 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 nnoremap <Esc> :noh<CR>
 
 " Format entire file
-nnoremap <silent> <leader>f :Format<CR>
-nnoremap <silent> <leader>F :FormatWrite<CR>
+nnoremap <silent> <leader>Ff :Format<CR>
+nnoremap <silent> <leader>FF :FormatWrite<CR>
 
 " Format selected code 
-xmap <leader>fs <Plug>(coc-format-selected)
+xmap <leader>Fs <Plug>(coc-format-selected)
 
 " Show all diagnostics
-nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ca :<C-u>CocList diagnostics<cr>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Show commands
-nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>cc :<C-u>CocList commands<cr>
 
 " Show symbols
-nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>co :<C-u>CocList outline<cr>
 
 " Custom keymappings for PHP formatting
 augroup PHPFormatting
   autocmd!
-  autocmd FileType php nnoremap <buffer> <leader>f :call CocAction('format')<CR>
+  autocmd FileType php nnoremap <buffer> <leader>Ff :call CocAction('format')<CR>
 augroup END
 
 " Set colorscheme
