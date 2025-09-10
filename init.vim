@@ -63,6 +63,15 @@ set splitbelow                          " Open horizontal splits below
 set splitright                          " Open vertical splits right
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Folding Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldmethod=indent                   " Fold based on indentation
+set foldlevelstart=99                   " Start with all folds open
+set foldnestmax=10                      " Maximum nesting of folds
+set foldenable                          " Enable folding
+set foldcolumn=1                        " Show fold column
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ignorecase                          " Case insensitive search
@@ -453,6 +462,13 @@ wk.add({
   { "<leader>ge", ":Gedit<CR>", desc = "Git Edit" },
   { "<leader>gm", ":Git merge<CR>", desc = "Git Merge" },
   
+  -- Folding mappings
+  { "<leader>=", "za", desc = "Toggle Fold" },
+  { "<leader>+", "zR", desc = "Open All Folds" },
+  { "<leader>-", "zM", desc = "Close All Folds" },
+  { "<leader>0", "zc", desc = "Close Fold" },
+  { "<leader>9", "zo", desc = "Open Fold" },
+  
   -- Goto mappings
   { "g", group = "goto" },
   { "gd", "<Plug>(coc-definition)", desc = "Go to Definition" },
@@ -558,6 +574,13 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 " Clear search highlighting with <Esc>
 nnoremap <Esc> :noh<CR>
+
+" Folding keymaps (similar to PhpStorm's Cmd+/Cmd-)
+nnoremap <leader>= za
+nnoremap <leader>+ zR
+nnoremap <leader>- zM
+nnoremap <leader>0 zc
+nnoremap <leader>9 zo
 
 " Format entire file
 nnoremap <silent> <leader>Ff :Format<CR>
