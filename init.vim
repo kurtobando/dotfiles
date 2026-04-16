@@ -145,7 +145,7 @@ Plug 'lewis6991/gitsigns.nvim'                              " Git signs in the g
 Plug 'tpope/vim-fugitive'                                   " Premier Git integration for Vim
 
 " Syntax and Language, then Formatter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'main', 'do': ':TSUpdate'} " Better syntax highlighting
 Plug 'mhartington/formatter.nvim'
 
 " UI Enhancements
@@ -166,24 +166,39 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua <<EOF
 require('lualine').setup()
-require'nvim-treesitter.configs'.setup{
-  highlight = {
-    enable = true,
-    disable = {}
+-- nvim-treesitter `main` branch: no more `configs.setup{}`.
+-- Parsers are installed via :TSInstall / require('nvim-treesitter').install(),
+-- and highlighting is turned on per-filetype via vim.treesitter.start().
+require('nvim-treesitter').install({
+  'php',
+  'phpdoc',
+  'html',
+  'css',
+  'javascript',
+  'typescript',
+  'tsx',
+  'json',
+  'lua',
+  'python',
+  'bash',
+  'yaml',
+  'markdown',
+  'markdown_inline',
+  'vim',
+  'vimdoc',
+  'query',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'php', 'html', 'css', 'javascript', 'javascriptreact',
+    'typescript', 'typescriptreact', 'json', 'lua', 'python',
+    'sh', 'bash', 'yaml', 'markdown', 'vim',
   },
-  ensure_installed = {
-    "php",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "json",
-    "lua",
-    "python",
-    "bash",
-    "yaml"
-  },
-}
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
 require'nvim-tree'.setup {
   disable_netrw = true,
   hijack_netrw = true,
