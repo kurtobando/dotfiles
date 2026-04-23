@@ -169,9 +169,11 @@ Before starting, install the tools this config expects to find on your system.
 
 - Completion, diagnostics, code actions, and navigation through `coc.nvim`
 - PHP tooling through Intelephense, Laravel, PHPStan, Blade, and related CoC extensions
-- JavaScript and TypeScript support through CoC TS Server extensions
+- JavaScript and TypeScript support through the CoC TS Server extension
 - Vue support through Volar extensions
-- Tailwind, HTML, CSS, JSON, YAML, Dotenv, Emmet, and snippets via CoC extensions
+- Tailwind, HTML, CSS, JSON, YAML, Dotenv, Emmet, snippets, and Vimscript support via CoC extensions
+- JavaScript refactoring helpers through `coc-jsref`
+- Optional Go language support through `coc-go`
 - Telescope fuzzy finding and live grep
 - `nvim-tree` file explorer on the right side
 - Tokyo Night with a pure black background override
@@ -181,8 +183,59 @@ Before starting, install the tools this config expects to find on your system.
 - `formatter.nvim` for JavaScript, TypeScript, JSON, HTML, CSS, Vue, YAML, Python, Shell, Lua, Vim, and generic trailing-whitespace cleanup
 - `mini.pairs` and `mini.move`
 - `vim-surround`
-- Git commands through `vim-fugitive`
+- Git commands through `vim-fugitive` plus CoC Git integration
+- CoC extension browsing through `coc-marketplace`
 - Optional GitHub Copilot keybindings
+
+## Configured CoC Extensions
+
+This repo currently declares the following extensions in `g:coc_global_extensions`. On a fresh setup, CoC will install this set automatically.
+
+### PHP And Laravel
+
+- `@yaegassy/coc-intelephense`
+- `@yaegassy/coc-laravel`
+- `@yaegassy/coc-phpstan`
+- `coc-blade`
+- `coc-php-cs-fixer`
+
+Notes:
+
+- In this repo, the default PHP formatting path still uses Intelephense via `CocAction('format')`.
+- `coc-php-cs-fixer` remains installed for PHP CS Fixer / Laravel Pint-related workflows, but it is not the default `<Space>Ff` formatting path.
+
+### Frontend And Web
+
+- `@yaegassy/coc-volar`
+- `@yaegassy/coc-volar-tools`
+- `coc-css`
+- `coc-dotenv`
+- `coc-emmet`
+- `coc-format-json`
+- `coc-html`
+- `coc-html-css-support`
+- `coc-json`
+- `coc-tailwindcss`
+- `coc-tsserver`
+- `coc-yaml`
+
+Notes:
+
+- JSON support comes from both `coc-json` and `coc-format-json`, but JSON buffer formatting is currently handled by `formatter.nvim`.
+- JavaScript, TypeScript, HTML, CSS, Vue, JSON, and YAML formatting are all routed through `formatter.nvim` in `init.vim`.
+
+### Editor And Workflow
+
+- `coc-actions`
+- `coc-git`
+- `coc-jsref`
+- `coc-marketplace`
+- `coc-snippets`
+- `coc-vimlsp`
+
+### Additional Language Support
+
+- `coc-go`
 
 ## Installed But Not Explicitly Configured
 

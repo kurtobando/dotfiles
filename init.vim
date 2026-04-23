@@ -21,11 +21,9 @@ let g:coc_global_extensions = [
   \ 'coc-marketplace',
   \ 'coc-tailwindcss',
   \ 'coc-tsserver',
-  \ 'coc-tsserver-dev',
   \ 'coc-vimlsp',
   \ 'coc-yaml',
   \ 'coc-snippets',
-  \ 'coc-prettier',
   \ 'coc-format-json',
   \ 'coc-php-cs-fixer',
   \ ]
@@ -132,7 +130,7 @@ Plug 'github/copilot.vim'                                   " AI code suggestion
 
 " File Navigation and Explorer
 Plug 'nvim-lualine/lualine.nvim'                            " Status line
-Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.0' }    " Fuzzy finder
+Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.1' }    " Fuzzy finder
 Plug 'nvim-telescope/telescope-fzy-native.nvim'             " Better sorting performance
 Plug 'nvim-telescope/telescope-file-browser.nvim'           " Better file browsing
 Plug 'nvim-tree/nvim-tree.lua'                              " File explorer
