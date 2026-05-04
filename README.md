@@ -4,7 +4,7 @@ This repository is a personal Neovim configuration focused on Laravel and PHP de
 
 The current setup is centered on:
 
-- `vim-plug` for plugin management
+- `lazy.nvim` for plugin management
 - `coc.nvim` for completion, code actions, diagnostics, and language tooling
 - Intelephense for PHP intelligence and formatting
 - Telescope for fuzzy finding and search
@@ -14,8 +14,11 @@ The current setup is centered on:
 
 ## Project Structure
 
-- `init.vim`: the main Neovim config. It contains general settings, plugin declarations, embedded Lua plugin setup, and all keymaps.
+- `init.lua`: the main Neovim entry point. Bootstraps `lazy.nvim` and loads core config and plugins.
+- `lua/core/`: general settings, keymaps, and autocommands.
+- `lua/plugins/`: individual plugin specs for `lazy.nvim`.
 - `coc-settings.json`: CoC and Intelephense settings, including PHP diagnostics, formatting, file associations, and root patterns.
+- `lazy-lock.json`: auto-generated lockfile that pins exact plugin versions.
 - `README.md`: usage and setup documentation for this repo.
 
 ## Prerequisites
@@ -134,33 +137,24 @@ Before starting, install the tools this config expects to find on your system.
 
 ## Installation
 
-1. Install `vim-plug`:
-   ```bash
-   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-   ```
-
-2. Create the Neovim config directory:
+1. Create the Neovim config directory:
    ```bash
    mkdir -p ~/.config/nvim
    ```
 
-3. Copy `init.vim` and `coc-settings.json` into that directory:
+2. Copy the contents of this repository into that directory:
    ```bash
-   cp init.vim coc-settings.json ~/.config/nvim/
+   cp -r * ~/.config/nvim/
    ```
 
-4. Open Neovim and install plugins:
+3. Open Neovim:
    ```bash
    nvim
    ```
 
-   Then run:
-   ```vim
-   :PlugInstall
-   ```
+   `lazy.nvim` will bootstrap and install all plugins automatically on first launch. Run `:Lazy` to view the plugin dashboard, or `:Lazy sync` to update.
 
-5. CoC extensions listed in `g:coc_global_extensions` will install automatically when Neovim starts. Verify them with:
+4. CoC extensions listed in `g:coc_global_extensions` will install automatically when Neovim starts. Verify them with:
    ```vim
    :CocList extensions
    ```
@@ -175,6 +169,7 @@ Before starting, install the tools this config expects to find on your system.
 - JavaScript refactoring helpers through `coc-jsref`
 - Optional Go language support through `coc-go`
 - Telescope fuzzy finding and live grep
+- Telescope file browser (`<Space>fe`)
 - `nvim-tree` file explorer on the right side
 - Tokyo Night with a pure black background override
 - Lualine statusline and Bufferline tab-style buffer list
@@ -183,7 +178,7 @@ Before starting, install the tools this config expects to find on your system.
 - `formatter.nvim` for JavaScript, TypeScript, JSON, HTML, CSS, Vue, YAML, Python, Shell, Lua, Vim, and generic trailing-whitespace cleanup
 - `mini.pairs` and `mini.move`
 - `vim-surround`
-- Git commands through `vim-fugitive` plus CoC Git integration
+- Git commands through `vim-fugitive` plus `gitsigns.nvim` gutter signs and CoC Git integration
 - CoC extension browsing through `coc-marketplace`
 - Optional GitHub Copilot keybindings
 
@@ -222,7 +217,7 @@ Notes:
 Notes:
 
 - JSON support comes from both `coc-json` and `coc-format-json`, but JSON buffer formatting is currently handled by `formatter.nvim`.
-- JavaScript, TypeScript, HTML, CSS, Vue, JSON, and YAML formatting are all routed through `formatter.nvim` in `init.vim`.
+- JavaScript, TypeScript, HTML, CSS, Vue, JSON, and YAML formatting are all routed through `formatter.nvim`.
 
 ### Editor And Workflow
 
@@ -237,16 +232,6 @@ Notes:
 
 - `coc-go`
 
-## Installed But Not Explicitly Configured
-
-These plugins are declared in `init.vim`, but this repo does not currently include an explicit setup block or documented workflow for them:
-
-- `lewis6991/gitsigns.nvim`
-- `ray-x/lsp_signature.nvim`
-- `nvim-telescope/telescope-file-browser.nvim`
-
-The README does not assume those features are active until they are configured in the repo.
-
 ## Key Mappings
 
 Leader is `<Space>`. which-key is configured, so pressing leader will show grouped mappings.
@@ -257,6 +242,7 @@ Leader is `<Space>`. which-key is configured, so pressing leader will show group
 - `<Space>fg` - Live grep with Telescope
 - `<Space>fb` - List open buffers with Telescope
 - `<Space>fh` - Search help tags with Telescope
+- `<Space>fe` - Open Telescope file browser
 - `<Space>e` - Toggle `nvim-tree`
 - `[b` - Previous buffer
 - `]b` - Next buffer
@@ -304,7 +290,6 @@ Notes:
 
 - For most filetypes, `<Space>Ff` and `<Space>FF` use `formatter.nvim`.
 - For PHP, formatting delegates to Intelephense via CoC.
-- There is also a PHP-specific buffer-local `<Space>Ff` mapping that calls `CocAction('format')` directly.
 
 ### Git
 
@@ -392,8 +377,6 @@ This configuration currently includes:
 
 The config includes several performance-oriented defaults:
 
-- `lazyredraw` to reduce redraw work during macros
-- `ttyfast` for terminal responsiveness
 - `synmaxcol=3000` to limit syntax work on extremely long lines
 - `redrawtime=10000` to allow more time for complex highlighting
 - `maxmempattern=2000000` for larger pattern-matching limits
@@ -401,11 +384,27 @@ The config includes several performance-oriented defaults:
 - `updatetime=300` for faster feedback from completion and diagnostics
 - `g:coc_node_args = ['--max-old-space-size=8192']` to give CoC more memory
 
+## Plugin Management
+
+Plugins are managed by `lazy.nvim`. Open the dashboard with:
+
+```vim
+:Lazy
+```
+
+Useful commands:
+- `:Lazy sync` - install, clean, and update all plugins
+- `:Lazy update` - update all plugins
+- `:Lazy profile` - view startup time breakdown
+- `:Lazy clean` - remove unused plugins
+
+The `lazy-lock.json` file pins exact plugin versions. Commit it to version control to keep setups reproducible.
+
 ## Troubleshooting
 
 ### Missing Plugins
 
-- Run `:PlugInstall`
+- Run `:Lazy sync`
 - Restart Neovim
 
 ### CoC Errors
@@ -438,7 +437,7 @@ The config includes several performance-oriented defaults:
 ### UI Problems
 
 - Run `:messages` and look for startup Lua errors
-- Re-run `:PlugInstall` if a plugin is missing
+- Run `:Lazy sync` if a plugin is missing
 
 ### General Health Checks
 
